@@ -1,6 +1,9 @@
 package model;
 
-public class Movie extends Film {
+import java.util.ArrayList;
+import java.util.Date;
+
+public class Movie extends Film implements IVisualizable {
 
     private int id;
     private int timeViewed;
@@ -10,8 +13,6 @@ public class Movie extends Film {
         setYear(year);
     }
 
-
-    
     public void showData() {
         //   System.out.println("Title: " + title);
         //   System.out.println("Genre: " + genre);
@@ -29,10 +30,37 @@ public class Movie extends Film {
     public void setTimeViewed(int timeViewed) {
         this.timeViewed = timeViewed;
     }
-    
-        @Override
+
+    @Override
     public String toString() {
-        return "Title: el tucu lo mama rico";
+        return "\n :: MOVIE ::"
+                + "\n Title: " + getTitle()
+                + "\n Genero: " + getGenre()
+                + "\n Year: " + getYear()
+                + "\n Creator: " + getCreator()
+                + "\n Duration: " + getDuration();
     }
-    
+
+    @Override
+    public Date startToSee(Date dateI) {
+        return dateI;
+    }
+
+    @Override
+    public void stopToSee(Date dateI, Date dateF) {
+        if (dateF.getSeconds() > dateI.getSeconds()) {
+            setTimeViewed(dateF.getSeconds() - dateI.getSeconds());
+        } else {
+            setTimeViewed(0);
+        }
+    }
+
+    public static ArrayList<Movie> makeMoviesList() {
+        ArrayList<Movie> movies = new ArrayList();
+
+        for (int i = 0; i <= 5; i++) {
+            movies.add(new Movie("Movie 1" + i, "Genero 1" + i, "Creador 1" + i, 120 + i, (short) (2017 + i)));
+        }
+        return movies;
+    }
 }

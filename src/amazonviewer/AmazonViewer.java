@@ -1,5 +1,6 @@
 package amazonviewer;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Set;
 import model.Movie;
@@ -55,9 +56,15 @@ public class AmazonViewer {
 
     public static void showMovies() {
         int exit = 0;
+        ArrayList<Movie> movies = Movie.makeMoviesList();
         do {
             System.out.println();
             System.out.println(":: MOVIES ::");
+            System.out.println();
+            for (int i = 0; i < movies.size(); i++) {
+                System.out.println(i + 1 + ". " + movies.get(i).getTitle() + " Visto: " + movies.get(i).isViewed());
+            }
+            System.out.println("0. Regresar al Menu");
             System.out.println();
         } while (exit != 0);
     }
@@ -108,11 +115,7 @@ public class AmazonViewer {
     }
 
     public static void main(String[] args) {
-        // TODO auto-Generated code here! 
-        /* Movie movie = new Movie("Coco", "Animation", (short) 2017);
-        movie.setTitle("Coco");
-        movie.showData(); */
-        Movie movie = new Movie("Coco", "Animation", "Lee Unkirch", 120, (short) 2017);
-        System.out.println(movie);
+        showMenu();
+
     }
 }

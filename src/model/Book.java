@@ -2,23 +2,15 @@ package model;
 
 import java.util.Date;
 
-public class Book {
+public class Book extends Publication implements IVisualizable {
 
     private int id;
-    private String title;
-    private Date edititionDate;
-    private String editorial;
-    private String[] authors;
     private String isbn;
     private boolean readed;
     private int timeReaded;
 
-    public Book(String title, Date edititionDate, String editorial, String isbn) {
-        super();
-        this.title = title;
-        this.edititionDate = edititionDate;
-        this.editorial = editorial;
-        this.isbn = isbn;
+    public Book(String title, Date edititionDate, String editorial) {
+        super(title, edititionDate, editorial);
     }
 
     public int getId() {
@@ -27,38 +19,6 @@ public class Book {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public Date getEdititionDate() {
-        return edititionDate;
-    }
-
-    public void setEdititionDate(Date edititionDate) {
-        this.edititionDate = edititionDate;
-    }
-
-    public String getEditorial() {
-        return editorial;
-    }
-
-    public void setEditorial(String editorial) {
-        this.editorial = editorial;
-    }
-
-    public String[] getAuthors() {
-        return authors;
-    }
-
-    public void setAuthors(String[] authors) {
-        this.authors = authors;
     }
 
     public String getIsbn() {
@@ -85,4 +45,32 @@ public class Book {
         this.timeReaded = timeReaded;
     }
 
+    @Override
+    public String toString() {
+        String detailBook = "\n :: BOOK ::"
+                + "\n Title: " + getTitle()
+                + "\n Editorial: " + getEditorial()
+                + "\n Edition Date: " + getEdititionDate()
+                + "\n Authors: ";
+
+        for (int i = 0; i < getAuthors().length; i++) {
+            detailBook += "\t" + getAuthors()[i];
+        }
+        return detailBook;
+    }
+
+    @Override
+    public Date startToSee(Date dateI) {
+        return dateI;
+    }
+
+    @Override
+    public void stopToSee(Date dateI, Date dateF) {
+        if (dateF.getSeconds() > dateI.getSeconds()) {
+            setTimeReaded(dateF.getSeconds() - dateI.getSeconds());
+        } else {
+            setTimeReaded(0);
+        }
+    }
 }
+

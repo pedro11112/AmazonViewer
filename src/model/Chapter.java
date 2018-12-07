@@ -18,4 +18,14 @@ public class Chapter extends Movie {
         this.sessionNumber = sessionNumber;
     }
 
+    @Override
+    public String toString() {
+        return "\n :: CHAPTER ::"
+                + "\n Title: " + getTitle()
+                + "\n Year: " + getYear()
+                + "\n Creator: " + getCreator()
+                + "\n Duration: " + getDuration();
+
+    }
+
 }
